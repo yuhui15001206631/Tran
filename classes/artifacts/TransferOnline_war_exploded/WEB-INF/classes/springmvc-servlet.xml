@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       <context:component-scan base-package="com.yyw.controller"></context:component-scan>
+       <mvc:annotation-driven></mvc:annotation-driven>
+       <mvc:resources mapping="/statics/**" location="/statics/"></mvc:resources>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!--配置AOP增强处理-->
+   <!-- &lt;!&ndash;声明增强方法所在的bean&ndash;&gt;
+    <bean id="theLogger" class="com.yyw.aop.ControllerLogger"></bean>
+    &lt;!&ndash;配置切面&ndash;&gt;
+    <aop:config>
+        &lt;!&ndash;配置切入点&ndash;&gt;
+        <aop:pointcut id="pointcut" expression="execution(* com.yyw.controller.*.*(..))"></aop:pointcut>
+        <aop:aspect ref="theLogger">
+            <aop:before method="before" pointcut-ref="pointcut"></aop:before>
+            <aop:after-returning method="after" pointcut-ref="pointcut" returning="result"></aop:after-returning>
+        </aop:aspect>
+    </aop:config>-->
+</beans>

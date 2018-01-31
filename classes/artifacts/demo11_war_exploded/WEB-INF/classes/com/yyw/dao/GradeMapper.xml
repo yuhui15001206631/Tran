@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyw.dao.GradeMapper">
+      <resultMap id="gradeMap" type="Grade">
+          <result property="date" column="create_date"></result>
+          <result property="gradeName" column="grade_name"></result>
+      </resultMap>
+      <select id="getAllGrade" resultMap="gradeMap">
+          select * from grade order by id
+      </select>
+    <select id="getGradeById" parameterType="Integer" resultMap="gradeMap">
+        select * from grade where id=#{id}
+    </select>
+    <delete id="deleteGradeById" parameterType="Integer">
+        DELETE from grade where id=#{id};
+    </delete>
+    <!--批量删除-->
+    <delete id="deleteGradeByIds" parameterType="Integer">
+        DELETE from grade where id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--添加班级-->
+    <insert id="addGrade" parameterType="Grade" keyProperty="id" useGeneratedKeys="true">
+        insert into grade values (null,#{gradeName},now(),#{details});
+    </insert>
+</mapper>

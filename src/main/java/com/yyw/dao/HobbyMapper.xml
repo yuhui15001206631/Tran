@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyw.dao.HobbyMapper">
+    <resultMap id="hobbyMap" type="Hoppy">
+        <id property="id" column="id"></id>
+        <result property="hobbyName" column="hobby_name"></result>
+        <result property="createTime" column="create_time"></result>
+    </resultMap>
+    <select id="queryAll" resultMap="hobbyMap">
+        select * from hobby
+    </select>
+    <insert id="addHobby" parameterType="Hoppy">
+        insert into hobby values (null,#{hobbyName},now());
+    </insert>
+</mapper>

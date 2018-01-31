@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyw.dao.StudentMapper">
+    <resultMap id="studentMap" type="Student">
+        <id property="id" column="id"></id>
+        <result property="studentName" column="student_name"></result>
+        <result property="studentNum" column="student_num"></result>
+        <association property="grade" javaType="Grade">
+            <id property="id" column="g_id"></id>
+            <result property="gradeName" column="grade_name"></result>
+        </association>
+    </resultMap>
+    <select id="queryAll" resultMap="studentMap">
+        select s.*,g.id as g_id,g.grade_name
+        from student s,grade g
+        where s.grade_id=g.id
+    </select>
+    <select id="queryStudentById" resultMap="studentMap">
+         select s.*,g.id as g_id,g.grade_name
+        from student s,grade g
+        where s.grade_id=g.id
+        and s.id=#{id}
+    </select>
+    <insert id="addStudent" parameterType="Student">
+        insert into student values (null,#{grade.id},#{studentName},#{gender},#{age},#{studentNum});
+    </insert>
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student set student_name=#{studentName},student_num=#{studentNum},gender=#{gender},
+        age=#{age},grade_id=#{grade.id} where id=#{id}
+    </update>
+    <!--根据班级iD删除学生-->
+    <delete id="deleteStudentBygradeId" parameterType="Integer">
+        DELETE from student where grade_id=#{gradeId}
+    </delete>
+</mapper>

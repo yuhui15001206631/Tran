@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyw.dao.AccountMapper">
+    <select id="login" resultType="Account">
+        select * from account
+        where account_number=#{account_number}
+        and password=#{password}
+    </select>
+    <select id="queryAccount" parameterType="String" resultType="Account">
+        select * from account
+        where account_number=#{account_number}
+    </select>
+    <update id="addMonny">
+        UPDATE account SET balance=balance+#{monny} where account_number=#{account_number}
+    </update>
+    <update id="deleteMonny">
+        UPDATE account SET balance=balance-#{monny} where account_number=#{account_number}
+    </update>
+</mapper>
